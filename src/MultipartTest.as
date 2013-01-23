@@ -70,10 +70,8 @@ package
 			
 			// add files
 			form.addFile("file1", test, "text/plain", "test.txt");
-			form.addFile("file2", jpg.encode(b.bitmapData), "application/octet-stream", "test.jpg");
-		
-			//navigateToURL(form.request);
-			
+			form.addFile("file2", jpg.encode(b.bitmapData), "image/jpeg", "test.jpg");
+				
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onComplete);
 			try {
