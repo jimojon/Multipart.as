@@ -22,6 +22,8 @@ package
 		public var b:Bitmap;
 		public var t:TextField;
 		
+		private var url:String = "http://labs.positronic.fr/flash/multipart/upload.php";
+		
 		public function MultipartTest()
 		{
 			stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -45,6 +47,10 @@ package
 			t.y = s.y;
 			addChild(t);
 			t.text = "Click to upload";
+			
+			if(loaderInfo.parameters["url"] != null){
+				url = loaderInfo.parameters["url"];
+			}
 		}
 		
 		protected function onClick(event:Event):void
@@ -56,22 +62,24 @@ package
 			var test:ByteArray = new ByteArray();
 			test.writeMultiByte("Hello", "ascii");
 			
-			var form:Multipart = new Multipart("http://labs.positronic.fr/flash/multipart/upload.php");
+			var form:Multipart = new Multipart(url);
 			
 			// add fields
 			form.addField("field1", "hello");
 			form.addField("field2", "world");
 			
 			// add files
-			form.addFile("file1", test, "text/plain", "test.txt", true);
-			form.addFile("file2", jpg.encode(b.bitmapData), "application/octet-stream", "test.jpg", true);
+			form.addFile("file1", test, "text/plain", "test.txt");
+			form.addFile("file2", jpg.encode(b.bitmapData), "application/octet-stream", "test.jpg");
 		
+			//navigateToURL(form.request);
+			
 			var loader:URLLoader = new URLLoader();
 			loader.addEventListener(Event.COMPLETE, onComplete);
 			try {
 				loader.load(form.request);
 			} catch (error: Error) {
-				t.text = "Unable to load requested document";
+				t.text = "Unable to load requested document : "+error.message;
 			}
 		}
 		

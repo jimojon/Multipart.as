@@ -29,8 +29,8 @@ package com.jonas.net
 			_fields.push({name:name, value:value});
 		}
 		
-		public function addFile(name:String, byteArray:ByteArray, mimeType:String, fileName:String, binary:Boolean):void {
-			_files.push({name:name, byteArray:byteArray, mimeType:mimeType, fileName:fileName, binary:Boolean});
+		public function addFile(name:String, byteArray:ByteArray, mimeType:String, fileName:String):void {
+			_files.push({name:name, byteArray:byteArray, mimeType:mimeType, fileName:fileName});
 		}
 		
 		public function clear():void {
