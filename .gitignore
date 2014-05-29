@@ -1,0 +1,14 @@
+# Flash Builder
+.settings/
+.actionScriptProperties
+.project
+bin-debug/
+bin-release/
+html-template/
+
+# JPEGEncoder by Thibault Imbert
+# http://www.bytearray.org/wp-content/projects/fastjpeg/JPEGEncoder.as
+src/JPEGEncoder.as
+
+# Project
+doc/

@@ -6,9 +6,12 @@ A multipart form data request generator
 
 http://labs.positronic.fr/flash/multipart/
 
+The JPEGEncoder used in this demo can be found here:
+http://www.bytearray.org/wp-content/projects/fastjpeg/JPEGEncoder.as
+
 ##Restrictions :
 
-###navigateToURL :
+Security restrictions with navigateToURL :
 
 In Flash Player 10 and later, if you use a multipart Content-Type (for example "multipart/form-data") that contains an upload (indicated by a "filename" parameter in a "content-disposition" header within the POST body), the POST operation is subject to the security rules applied to uploads:
 

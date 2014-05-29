@@ -1,7 +1,5 @@
 package com.jonas.net 
 {
-	import flash.events.Event;
-	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
 	import flash.utils.ByteArray;
@@ -72,6 +70,10 @@ package com.jonas.net
 			r.data = _data;
 			r.method = URLRequestMethod.POST;
 			r.contentType = "multipart/form-data; boundary=" + boundary;
+			
+			// Tiago Ribeiro's suggestion
+			// Not necessary until proven otherwise
+			//r.requestHeaders.push(new URLRequestHeader("Content-type", "multipart/form-data; boundary=" + boundary)); 
 			
 			return r;
 			
