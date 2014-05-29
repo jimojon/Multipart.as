@@ -7,7 +7,6 @@ A multipart form data request generator
 http://labs.positronic.fr/flash/multipart/
 
 The JPEGEncoder used in this demo can be found here:
-
 http://www.bytearray.org/wp-content/projects/fastjpeg/JPEGEncoder.as
 
 ##Restrictions :
@@ -19,5 +18,4 @@ In Flash Player 10 and later, if you use a multipart Content-Type (for example "
 
 
 Source :
-
 http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/net/URLRequest.html
