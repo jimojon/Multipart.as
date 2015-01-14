@@ -19,3 +19,39 @@ In Flash Player 10 and later, if you use a multipart Content-Type (for example "
 
 Source :
 http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/flash/net/URLRequest.html
+
+
+## How to use it
+
+Create a new `Multipart` object giving it the url you're asking for. The method will be automatically set at `POST`.
+
+Then you can use the following methods agains your object:
+
+* `addField(string fieldName, string value)`
+* `addFile(string fieldName, ByteArray file, string mimeType, string fileName)`
+
+Then you can retrieve the request at `yourObject.request` and load it with the native urlloader of actionscript.
+
+Extracted from the Demo, here is a basic example:
+
+```actionscript
+// Instanciate Multipart with url
+var form:Multipart = new Multipart(url);
+
+// Add fields
+form.addField("field1", "hello");
+form.addField("field2", "world");
+
+// Add files
+form.addFile("file1", text, "text/plain", "test.txt");
+form.addFile("file2", image, "image/jpeg", "test.jpg");
+
+// Load request
+var loader:URLLoader = new URLLoader();
+loader.addEventListener(Event.COMPLETE, onComplete);
+try {
+	loader.load(form.request);
+} catch (error: Error) {
+	textField.text = "Unable to load request : "+error.message;
+}
+```
