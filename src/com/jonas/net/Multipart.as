@@ -2,6 +2,7 @@ package com.jonas.net
 {
 	import flash.net.URLRequest;
 	import flash.net.URLRequestMethod;
+	import flash.net.URLRequestHeader;
 	import flash.utils.ByteArray;
 
 	/**
@@ -19,17 +20,20 @@ package com.jonas.net
 		private var _files:Array = [];
 		private var _data:ByteArray = new ByteArray();
 
-		public function Multipart(url:String = null) {
+		public function Multipart(url:String = null)
+		{
 			_url = url;
 		}
 		
-		public function addFields(fields:Object):void {
+		public function addFields(fields:Object):void
+		{
 			for (var s:String in fields) {
 				addField(s, fields[s]);
 			}
 		}
 
-		public function addField(name:String, value:String):void {
+		public function addField(name:String, value:String):void
+		{
 			_fields.push({name:name, value:value});
 		}
 
@@ -37,7 +41,8 @@ package com.jonas.net
 			_files.push({name:name, byteArray:byteArray, mimeType:mimeType, fileName:fileName});
 		}
 
-		public function clear():void {
+		public function clear():void
+		{
 			_data = new ByteArray();
 			_fields = [];
 			_files = [];
@@ -75,32 +80,31 @@ package com.jonas.net
 			var r: URLRequest = new URLRequest(_url);
 			r.data = _data;
 			r.method = URLRequestMethod.POST;
-			r.contentType = "multipart/form-data; boundary=" + boundary;
-
-			// Tiago Ribeiro's suggestion
-			// Not necessary until proven otherwise
-			//r.requestHeaders.push(new URLRequestHeader("Content-type", "multipart/form-data; boundary=" + boundary));
+			r.requestHeaders.push( new URLRequestHeader('Content-type', 'multipart/form-data; boundary=' + boundary) );
 
 			return r;
 
 		}
+		
 		public function get url():String
 		{
 			return _url;
 		}
+		
 		public function set url(value:String):void
 		{
 			_url = value;
 		}
 
-		private function _writeString(value:String):void {
+		private function _writeString(value:String):void
+		{
 			var b:ByteArray = new ByteArray();
 			b.writeMultiByte(value, "ascii");
 			_data.writeBytes(b, 0, b.length);
 		}
 
-		private function _writeBytes(value:ByteArray):void {
-			//_writeString("....FILE....");
+		private function _writeBytes(value:ByteArray):void
+		{
 			value.position = 0;
 			_data.writeBytes(value, 0, value.length);
 		}
