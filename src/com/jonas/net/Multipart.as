@@ -19,6 +19,9 @@ package com.jonas.net
 		private var _fields:Array = [];
 		private var _files:Array = [];
 		private var _data:ByteArray = new ByteArray();
+		
+		//http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/charset-codes.html
+		public var encoding:String = 'ascii';
 
 		public function Multipart(url:String = null) {
 			_url = url;
@@ -92,7 +95,7 @@ package com.jonas.net
 
 		private function _writeString(value:String):void {
 			var b:ByteArray = new ByteArray();
-			b.writeMultiByte(value, "ascii");
+			b.writeMultiByte(value, encoding);
 			_data.writeBytes(b, 0, b.length);
 		}
 
