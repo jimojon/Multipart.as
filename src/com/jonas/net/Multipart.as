@@ -19,7 +19,7 @@ package com.jonas.net
 		private var _fields:Array = [];
 		private var _files:Array = [];
 		private var _data:ByteArray = new ByteArray();
-		private var _encoding:String = 'ascii'; //http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/charset-codes.html
+		private var _encoding:String = 'utf-8'; //http://help.adobe.com/en_US/FlashPlatform/reference/actionscript/3/charset-codes.html
 
 		public function Multipart(url:String = null) {
 			_url = url;
@@ -56,8 +56,9 @@ package com.jonas.net
 			n = _fields.length;
 			for(i=0; i<n; i++){
 				_writeString('--' + boundary + '\r\n'
-					+'Content-Disposition: form-data; name="'+_fields[i].name+'"\r\n\r\n'
-					+_fields[i].value+'\r\n');
+					+ 'Content-Disposition: form-data; name="' + _fields[i].name+'"\r\n\r\n');
+				_writeString(_fields[i].value, _encoding);
+				_writeString('\r\n');
 			}
 
 			// Add files
@@ -101,12 +102,12 @@ package com.jonas.net
 			_encoding = value;
 		}
 
-		private function _writeString(value:String):void {
+		private function _writeString(value:String, encoding:String = 'ascii'):void {
 			var b:ByteArray = new ByteArray();
-			b.writeMultiByte(value, _encoding);
+			b.writeMultiByte(value, encoding);
 			_data.writeBytes(b, 0, b.length);
 		}
-
+		
 		private function _writeBytes(value:ByteArray):void {
 			//_writeString("....FILE....");
 			value.position = 0;
