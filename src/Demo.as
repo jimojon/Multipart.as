@@ -73,6 +73,7 @@ package
 			// Add fields
 			form.addField("field1", "hello");
 			form.addField("field2", "world");
+			form.addField("field3", "Voici des caractères accentués pour tester l'encodage.");
 			
 			// Add files
 			form.addFile("file1", text, "text/plain", "test.txt");
